@@ -9,12 +9,12 @@
       ansible.builtin.shell: dnf module enable nginx:1.24 -y
 
     - name: Install Nginx
-      ansible.builtin.shell:
+      ansible.builtin.dnf:
         name: nginx
         states: present
 
     - name: Copy nginx config file
-      ansible.builtin.shell:
+      ansible.builtin.copy:
         src: nginx.conf
         dest: /etc/nginx/nginx.conf
 
