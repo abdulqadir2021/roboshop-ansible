@@ -1,0 +1,47 @@
+- name: Frontend Playbook
+  hosts: all
+  become: yes
+  tasks:
+    - name: Disable Default Nginx
+      ansible.builtin.dnf: dnf module disable nginx -y
+
+    - name: Enable Nginx 24 Version
+      ansible.builtin.dnf: dnf module enable nginx:1.24 -y
+
+    - name: Install Nginx
+      ansible.builtin.dnf:
+        name: nginx
+        states: present
+
+    - name: Copy nginx config file
+      ansible.builtin.dnf:
+        src: nginx.conf
+        dest: /etc/nginx/nginx/conf
+
+    - name: Start nginx
+      ansible.builtin.systemd.service:
+        name: nginx
+        state: started
+
+
+
+# print_heading "Clean up old application content
+# rm -rf /usr/share/nginx/html/* &>>$log_file
+# status_check $?
+#
+# print_heading "Downloading Application content"
+# curl -o /tmp/frontend.zip https://roboshop-artifacts.s3.amazonaws.com/frontend-v3.zip &>>$log_file
+# cd /usr/share/nginx/html
+# status_check $?
+#
+#
+#
+# print_heading "Extract Application content"
+# unzip /tmp/frontend.zip &>>$log_file
+# status_check $?
+#
+#
+# print_heading "Start Nginx"
+# systemctl enable nginx &>>$log_file
+# systemctl restart nginx &>>$log_file
+# status_check $?
