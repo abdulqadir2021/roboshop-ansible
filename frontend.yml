@@ -25,7 +25,7 @@
 
 
 
-# print_heading "Clean up old application content
+# print_heading "Clean up old application content"
 # rm -rf /usr/share/nginx/html/* &>>$log_file
 # status_check $?
 #
