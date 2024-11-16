@@ -14,7 +14,7 @@
         states: present
 
     - name: Copy nginx config file
-      ansible.builtin.dnf:
+      ansible.builtin.copy:
         src: nginx.conf
         dest: /etc/nginx/nginx.conf
 
@@ -23,18 +23,15 @@
         name: nginx
         state: started
 
-
-
 # print_heading "Clean up old application content"
 # rm -rf /usr/share/nginx/html/* &>>$log_file
 # status_check $?
 #
 # print_heading "Downloading Application content"
 # curl -o /tmp/frontend.zip https://roboshop-artifacts.s3.amazonaws.com/frontend-v3.zip &>>$log_file
-# cd /usr/share/nginx/html
 # status_check $?
-#
-#
+
+# cd /usr/share/nginx/html
 #
 # print_heading "Extract Application content"
 # unzip /tmp/frontend.zip &>>$log_file
