@@ -5,12 +5,12 @@
 - name: Delete old Application Directory
   ansible.builtin.file:
     path: /app
-    states: absent
+    state: absent
 
 - name: Create Application Directory
   ansible.builtin.file:
     path: /app
-    states: directory
+    state: directory
 
 - name: Download and extract application content
   ansible.builtin.unarchive:
