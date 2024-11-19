@@ -1,4 +1,4 @@
-- name: Install Python
+- name: Install Maven
   ansible.builtin.dnf:
     name: "{{ item }}"
     state: installed
