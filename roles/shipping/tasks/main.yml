@@ -18,6 +18,8 @@
     - app-user
     - master-data
 
+## The password hardcoded we will replace.
+
 - name: Restart Shipping
   ansible.builtin.systemd_service:
     name: shipping
