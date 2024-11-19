@@ -1,4 +1,4 @@
-- name: Install Pythom
+- name: Install Python
   ansible.builtin.dnf:
     name: "{{ item }}"
     state: installed
