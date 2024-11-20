@@ -5,7 +5,7 @@
   loop:
     - python3
     - gcc
-    - python3-deve1
+    - python3-devel
 
 - name: Load App Prerequisites
   ansible.builtin.include_tasks:
