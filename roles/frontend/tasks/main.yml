@@ -1,6 +1,3 @@
-- name: set-prompt
-  ansible.builtin.shell: set-prompt {{ app_name }}-{{ env }}
-
 - name: Enable Nginx 24 Version
   ansible.builtin.shell: dnf module enable nginx:1.24 -y
 
