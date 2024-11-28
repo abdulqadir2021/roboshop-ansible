@@ -19,4 +19,4 @@
 - name: Restart Catalogue Service
   ansible.builtin.systemd_service:
     name: catalogue
-    state: restart
+    state: restarted
