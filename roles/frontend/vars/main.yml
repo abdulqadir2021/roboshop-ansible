@@ -1,1 +1,2 @@
+  components
 components: ["catalogue", "cart", "user", "shipping", "payment"]
