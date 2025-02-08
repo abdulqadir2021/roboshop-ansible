@@ -6,6 +6,6 @@
   ignore_errors: yes
 
 - name: Extend LV
-  ansible.builtin.shell: lvextend -r -L {{item.size}}G /dev/mapper/RootVG-{{ item.volume }}
+  ansible.builtin.shell: lvextend -r -L {{item.size}} /dev/mapper/RootVG-{{ item.volume }}
   ignore_errors: yes
   loop: "{{ lvm_sizes }}"
