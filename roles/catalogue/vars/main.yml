@@ -1,5 +1,5 @@
 lvm_sizes:
-  - { volume: varVol, size: 12G }
+  - { volume: varVol, size: 7G }
   - { volume: rootVol, size: 6G }
   - { volume: homeVol, size: 960M }
   - { volume: logVol, size: 2G }
