@@ -34,10 +34,10 @@
     restart: true
     restart_policy: "always"
     ports:
-      - "8080:8080"
+        - "8080:8080"
     env:
-      MONGO: "{{ lookup('hashi_vault', 'roboshop-{{env}}/data/catalogue:MONGO token={{ vault_token }} url=http://vault-internal.abdulqadir.shop:8200')}}"
-      MONGO_URL: "{{ lookup('hashi_vault', 'roboshop-{{env}}/data/catalogue:MONGO_URL token={{ vault_token }} url=http://vault-internal.abdulqadir.shop:8200')}}"
+        MONGO: "{{ lookup('hashi_vault', 'roboshop-{{env}}/data/catalogue:MONGO token={{ vault_token }} url=http://vault-internal.abdulqadir.shop:8200')}}"
+        MONGO_URL: "{{ lookup('hashi_vault', 'roboshop-{{env}}/data/catalogue:MONGO_URL token={{ vault_token }} url=http://vault-internal.abdulqadir.shop:8200')}}"
 
 - name: Schema container
   containers.podman.podman_container:
