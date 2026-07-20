@@ -1,1 +1,66 @@
-components: ["catalogue", "cart", "user", "shipping", "payment"]
+- name: Frontend Playbook
+  hosts: all
+  become: yes
+  tasks:
+    - name: Disable Default Nginx
+      ansible.builtin.dnf: dnf module disable nginx
+
+    - name: Enable Nginx 24 Version
+      ansible.builtin.dnf: dnf module enable nginx:1.24
+
+    - name: Install Nginx
+      ansible.builtin.dnf:
+        name: nginx
+        state: present
+
+    - name: Copy nginx config file
+      ansible.builtin.copy:
+        src: nginx.conf
+        dest: /etc/nginx/nginx.conf
+
+    - name: Start nginx
+      ansible.builtin.systemd_services:
+        name: nginx
+        state: started
+
+
+
+# source common.sh
+# app_name=frontend
+#
+# print_heading "Disable Default Nginx"
+# dnf module disable nginx -y &>>$log_file
+#s tatus_check $?
+#
+# print_heading "Enable Nginx 24 Version"
+# dnf module enable nginx:1.24 -y &>>$log_file
+# status_check $?
+#
+# print_heading "Install Nginx"
+# dnf install nginx -y &>>$log_file
+# status_check $?
+#
+# print_heading "Copy Nginx config file"
+# cp nginx.conf /etc/nginx/nginx.conf &>>$log_file
+# status_check $?
+#
+# print_heading "Clean up old application content"
+# rm -rf /usr/share/nginx/html/* &>>$log_file
+# status_check $?
+#
+# print_heading "Downloading Application content"
+# curl -o /tmp/frontend.zip https://roboshop-artifacts.s3.amazonaws.com/frontend-v3.zip &>>$log_file
+# cd /usr/share/nginx/html
+# status_check $?
+#
+#
+#
+# print_heading "Extract Application content"
+# unzip /tmp/frontend.zip &>>$log_file
+# status_check $?
+#
+#
+# print_heading "Start Nginx"
+# systemctl enable nginx &>>$log_file
+# systemctl restart nginx &>>$log_file
+# status_check $?
