@@ -1,3 +1,32 @@
+- name: Frontend Playbook
+  hosts: all
+  become: yes
+  tasks:
+    - name: Disable Default Nginx
+      ansible.builtin.dnf: dnf module disable nginx -y
+
+    - name: Enable Nginx 24 Version
+      ansible.builtin.dnf: dnf module enable nginx:1.24 -y
+
+    - name: Install Nginx
+      ansible.builtin.dnf:
+        name: nginx
+        state: present
+
+    - name: Copy nginx config file
+      ansible.builtin.copy:
+        src: nginx.conf
+        dest: /etc/nginx/nginx.conf
+
+    - name: start nginx
+      ansible.builtin.systemd.service:
+        name: nginx
+        state: started
+
+
+
+
+
 #- name: Enable Nginx 24 Version
 #  ansible.builtin.shell: dnf module enable nginx:1.24 -y
 #
@@ -33,28 +62,28 @@
 #    state: restarted
 #    enabled: yes
 
-- name: Install Docker
-  ansible.builtin.include_role:
-    name: common
-    tasks_from: docker
-
-- name: Start App container
-  containers.podman.podman_container:
-    name: frontend
-    image: public.ecr.aws/w8x4g9h7/roboshop-v3/frontend
-    state: started
-    restart: true
-    restart_policy: "always"
-    ports:
-      - "80:80"
-    env:
-      CATALOGUE_HOST: "{{ lookup('hashi_vault', 'roboshop-{{env}}/data/frontend:CATALOGUE_HOST token={{ vault_token }} url=http://vault-internal.abdulqadir.shop:8200')}}"
-      CATALOGUE_PORT: "{{ lookup('hashi_vault', 'roboshop-{{env}}/data/frontend:CATALOGUE_PORT token={{ vault_token }} url=http://vault-internal.abdulqadir.shop:8200')}}"
-      USER_HOST: "{{ lookup('hashi_vault', 'roboshop-{{env}}/data/frontend:USER_HOST token={{ vault_token }} url=http://vault-internal.abdulqadir.shop:8200')}}"
-      USER_PORT: "{{ lookup('hashi_vault', 'roboshop-{{env}}/data/frontend:USER_PORT token={{ vault_token }} url=http://vault-internal.abdulqadir.shop:8200')}}"
-      CART_HOST: "{{ lookup('hashi_vault', 'roboshop-{{env}}/data/frontend:CART_HOST token={{ vault_token }} url=http://vault-internal.abdulqadir.shop:8200')}}"
-      CART_PORT: "{{ lookup('hashi_vault', 'roboshop-{{env}}/data/frontend:CART_PORT token={{ vault_token }} url=http://vault-internal.abdulqadir.shop:8200')}}"
-      SHIPPING_HOST: "{{ lookup('hashi_vault', 'roboshop-{{env}}/data/frontend:SHIPPING_HOST token={{ vault_token }} url=http://vault-internal.abdulqadir.shop:8200')}}"
-      SHIPPING_PORT: "{{ lookup('hashi_vault', 'roboshop-{{env}}/data/frontend:SHIPPING_PORT token={{ vault_token }} url=http://vault-internal.abdulqadir.shop:8200')}}"
-      PAYMENT_HOST: "{{ lookup('hashi_vault', 'roboshop-{{env}}/data/frontend:PAYMENT_HOST token={{ vault_token }} url=http://vault-internal.abdulqadir.shop:8200')}}"
-      PAYMENT_PORT: "{{ lookup('hashi_vault', 'roboshop-{{env}}/data/frontend:PAYMENT_PORT token={{ vault_token }} url=http://vault-internal.abdulqadir.shop:8200')}}"
+#- name: Install Docker
+#  ansible.builtin.include_role:
+ #   name: common
+#    tasks_from: docker
+#
+#- name: Start App container
+#  containers.podman.podman_container:
+#    name: frontend
+#    image: public.ecr.aws/w8x4g9h7/roboshop-v3/frontend
+#    state: started
+#    restart: true
+#    restart_policy: "always"
+#    ports:
+#      - "80:80"
+#    env:
+#      CATALOGUE_HOST: "{{ lookup('hashi_vault', 'roboshop-{{env}}/data/frontend:CATALOGUE_HOST token={{ vault_token }} url=http://vault-internal.abdulqadir.shop:8200')}}"
+#      CATALOGUE_PORT: "{{ lookup('hashi_vault', 'roboshop-{{env}}/data/frontend:CATALOGUE_PORT token={{ vault_token }} url=http://vault-internal.abdulqadir.shop:8200')}}"
+#      USER_HOST: "{{ lookup('hashi_vault', 'roboshop-{{env}}/data/frontend:USER_HOST token={{ vault_token }} url=http://vault-internal.abdulqadir.shop:8200')}}"
+#      USER_PORT: "{{ lookup('hashi_vault', 'roboshop-{{env}}/data/frontend:USER_PORT token={{ vault_token }} url=http://vault-internal.abdulqadir.shop:8200')}}"
+#      CART_HOST: "{{ lookup('hashi_vault', 'roboshop-{{env}}/data/frontend:CART_HOST token={{ vault_token }} url=http://vault-internal.abdulqadir.shop:8200')}}"
+#      CART_PORT: "{{ lookup('hashi_vault', 'roboshop-{{env}}/data/frontend:CART_PORT token={{ vault_token }} url=http://vault-internal.abdulqadir.shop:8200')}}"
+#      SHIPPING_HOST: "{{ lookup('hashi_vault', 'roboshop-{{env}}/data/frontend:SHIPPING_HOST token={{ vault_token }} url=http://vault-internal.abdulqadir.shop:8200')}}"
+#      SHIPPING_PORT: "{{ lookup('hashi_vault', 'roboshop-{{env}}/data/frontend:SHIPPING_PORT token={{ vault_token }} url=http://vault-internal.abdulqadir.shop:8200')}}"
+#      PAYMENT_HOST: "{{ lookup('hashi_vault', 'roboshop-{{env}}/data/frontend:PAYMENT_HOST token={{ vault_token }} url=http://vault-internal.abdulqadir.shop:8200')}}"
+#      PAYMENT_PORT: "{{ lookup('hashi_vault', 'roboshop-{{env}}/data/frontend:PAYMENT_PORT token={{ vault_token }} url=http://vault-internal.abdulqadir.shop:8200')}}"
