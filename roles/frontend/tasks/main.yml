@@ -37,7 +37,8 @@
     - name: start nginx
       ansible.builtin.systemd.service:
         name: nginx
-        state: started
+        state: restarted
+        enabled: yes
 
 
 #- name: Enable Nginx 24 Version
