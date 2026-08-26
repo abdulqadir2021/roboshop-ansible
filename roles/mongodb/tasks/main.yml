@@ -3,7 +3,7 @@
     src: mongodb.repo
     dest: /etc/yum.repos.d/mongodb.repo
 
-- name: Install Mongodb server
+- name: Install MongoDB server
   ansible.builtin.dnf:
     name: mongodb-org
     state: installed
@@ -16,7 +16,7 @@
 
 - name: start MongoDB service
   ansible.builtin.systemd_service:
-    name: mongodb
+    name: mongod
     state: restarted
     enabled: yes
 
