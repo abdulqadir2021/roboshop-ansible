@@ -101,3 +101,4 @@
 #      SHIPPING_PORT: "{{ lookup('hashi_vault', 'roboshop-{{env}}/data/frontend:SHIPPING_PORT token={{ vault_token }} url=http://vault-internal.abdulqadir.shop:8200')}}"
 #      PAYMENT_HOST: "{{ lookup('hashi_vault', 'roboshop-{{env}}/data/frontend:PAYMENT_HOST token={{ vault_token }} url=http://vault-internal.abdulqadir.shop:8200')}}"
 #      PAYMENT_PORT: "{{ lookup('hashi_vault', 'roboshop-{{env}}/data/frontend:PAYMENT_PORT token={{ vault_token }} url=http://vault-internal.abdulqadir.shop:8200')}}"
+
