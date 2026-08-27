@@ -1,10 +1,10 @@
-[Unit]
+   [Unit]
 Description = Catalogue Service
 
 [Service]
 User=roboshop
-Environment=MONGO={{ lookup('hashi_vault', 'roboshop-{{env}}/data/catalogue:MONGO token={{ vault_token }} url=http://vault-internal.abdulqadir.shop:8200')}}
-Environment=MONGO_URL="{{ lookup('hashi_vault', 'roboshop-{{env}}/data/catalogue:MONGO_URL token={{ vault_token }} url=http://vault-internal.abdulqadir.shop:8200')}}"
+Environment=MONGO=true
+Environment=MONGO_URL="mongodb://mongodb-{{env}}/yeloabhi.fun:27017/catalogue"
 ExecStart=/bin/node /app/server.js
 SyslogIdentifier=catalogue
 
