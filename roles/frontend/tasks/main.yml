@@ -12,8 +12,8 @@
     name: nginx
     state: present
 
-- name: Copy nginx config file
-  ansible.builtin.copy:
+- name: Create nginx config file
+  ansible.builtin.template:
     src: nginx.conf
     dest: /etc/nginx/nginx.conf
 
