@@ -5,7 +5,7 @@ Description=Shipping Service
 [Service]
 User=roboshop
 Environment=CART_ENDPOINT=cart-{{ env }}.yeloabhi.fun:8080
-Environment=DB_HOST=mysql-{{ env }}.yeloabhi.fun:8200')}}
+Environment=DB_HOST=mysql-{{ env }}.yeloabhi.fun
 ExecStart=/bin/java -jar /app/shipping.jar
 SyslogIdentifier=shipping
 
