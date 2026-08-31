@@ -10,6 +10,7 @@
 
 - name: Load SQL File
   ansible.builtin.shell: mysql -h mysql-{{ env }}.yeloabhi.fun -uroot -pRoboshop@1 < /app/db/{{ item }}.sql
+  loop:
     - schema
     - app-user
     - master-data
