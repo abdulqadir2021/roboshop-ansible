@@ -3,7 +3,7 @@ Description = Catalogue Service
 
 [Service]
 User=roboshop
-Environment=MONGO=True
+Environment=MONGO=true
 Environment=MONGO_URL="mongodb://mongodb-{{env}}.yeloabhi.fun:27017/catalogue"
 ExecStart=/bin/node /app/server.js
 SyslogIdentifier=catalogue
