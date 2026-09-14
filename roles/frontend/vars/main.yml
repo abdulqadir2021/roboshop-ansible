@@ -26,7 +26,7 @@
 
 
 # source common.sh
-# app_name=frontend
+# component=frontend
 #
 # print_heading "Disable Default Nginx"
 # dnf module disable nginx -y &>>$log_file
