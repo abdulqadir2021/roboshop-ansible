@@ -1,13 +1,13 @@
-- name: Load Python
-  ansible.builtin.include_role:
-    name: common
-    tasks_from: python
-
-#- name: Install Docker
+#- name: Load Python
 #  ansible.builtin.include_role:
 #    name: common
-#    tasks_from: docker
+#    tasks_from: python
 #
+- name: Install Docker
+  ansible.builtin.include_role:
+    name: common
+    tasks_from: docker
+
 #- name: Start App container
 #  containers.podman.podman_container:
 #    name: payment

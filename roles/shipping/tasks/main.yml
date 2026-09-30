@@ -1,33 +1,33 @@
-- name: Load Maven
-  ansible.builtin.include_role:
-    name: common
-    tasks_from: maven
-
-- name: Install MySQL Client
-  ansible.builtin.dnf:
-    name: mysql
-    state: installed
-
-- name: Load SQL File
-  ansible.builtin.shell: mysql -h mysql-{{ env }}.yeloabhi.fun -uroot -pRoboshop@1 < /app/db/{{ item }}.sql
-  loop:
-    - schema
-    - app-user
-    - master-data
+#- name: Load Maven
+#  ansible.builtin.include_role:
+#    name: common
+#    tasks_from: maven
+#
+#- name: Install MySQL Client
+#  ansible.builtin.dnf:
+#    name: mysql
+#    state: installed
+#
+#- name: Load SQL File
+#  ansible.builtin.shell: mysql -h mysql-{{ env }}.yeloabhi.fun -uroot -pRoboshop@1 < /app/db/{{ item }}.sql
+#  loop:
+#    - schema
+#    - app-user
+#    - master-data
 
 ## The password hardcoded we will replace.
 
-- name: Restart Shipping
-  ansible.builtin.systemd_service:
-    name: shipping
-    state: restarted
+- name: Install Docker
+  ansible.builtin.include_role:
+    name: common
+    tasks_from: docker
+
+#- name: Restart Shipping
+#  ansible.builtin.systemd_service:
+#    name: shipping
+#    state: restarted
 
 
-#- name: Install Docker
-#  ansible.builtin.include_role:
-#    name: common
-#    tasks_from: docker
-#
 #- name: Start App container
 #  containers.podman.podman_container:
 #    name: shipping

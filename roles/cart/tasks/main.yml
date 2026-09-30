@@ -1,13 +1,13 @@
-- name: Load Nodejs
-  ansible.builtin.include_role:
-    name: common
-    tasks_from: nodejs
-
-#- name: Install Docker
+#- name: Load Nodejs
 #  ansible.builtin.include_role:
 #    name: common
-#    tasks_from: docker
-#
+#    tasks_from: nodejs
+
+- name: Install Docker
+  ansible.builtin.include_role:
+    name: common
+    tasks_from: docker
+
 #- name: Start App container
 #  containers.podman.podman_container:
 #    name: cart
