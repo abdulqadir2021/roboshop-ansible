@@ -22,10 +22,10 @@
     name: common
     tasks_from: docker
 
-- name: Restart Shipping
-  ansible.builtin.systemd_service:
-    name: shipping
-    state: restarted
+#- name: Restart Shipping
+#  ansible.builtin.systemd_service:
+#    name: shipping
+#    state: restarted
 
 
 - name: Start App container
